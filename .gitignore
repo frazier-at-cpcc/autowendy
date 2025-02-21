@@ -1,0 +1,27 @@
+# Python virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Playwright browser data
+.playwright-browser-data/
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
