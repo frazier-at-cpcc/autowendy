@@ -102,11 +102,18 @@ async def process_courses(email: str, password: str) -> pd.DataFrame:
             courses = []
             view_dates_links = await page.get_by_role("link", name=re.compile("View", re.IGNORECASE)).all()
             
+            # Get course information using proper async/await
             for link in view_dates_links:
                 try:
-                    course_row = link.locator("xpath=./..")  # Go up to the row
-                    course_name = await (await course_row.locator("td").first).inner_text()
+                    # Get the parent row element
+                    parent_row = link.locator("xpath=..")
+                    
+                    # Get the first td element's text
+                    first_td = parent_row.locator("td").first
+                    course_name = await first_td.inner_text()
                     course_name = course_name.strip()
+                    
+                    # Get the href attribute
                     view_url = await link.get_attribute('href')
                     if view_url:
                         if not view_url.startswith('https://'):
